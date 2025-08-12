@@ -1,0 +1,82 @@
+# __[option(windows)]__
+# [terminal.shell]
+# program = "zsh.exe"
+#
+# __end__
+[selection]
+save_to_clipboard = true
+
+[window.dimensions]
+columns = 125
+lines = 40
+
+[[keyboard.bindings]]
+key = "N"
+mods = "Control|Shift"
+action = "CreateNewWindow"
+
+[[keyboard.bindings]]
+key = "PageUp"
+mods = "Shift"
+action = "ScrollHalfPageUp"
+
+[[keyboard.bindings]]
+key = "PageUp"
+mods = "Control|Shift"
+action = "ScrollPageUp"
+
+[[keyboard.bindings]]
+key = "PageDown"
+mods = "Shift"
+action = "ScrollHalfPageDown"
+
+[[keyboard.bindings]]
+key = "PageDown"
+mods = "Control|Shift"
+action = "ScrollPageDown"
+
+# __[option(linux)]__
+# [font.normal]
+# family = "Fira Code"
+# style = "Retina"
+# __end__
+# __[option(windows)]__
+# [font.normal]
+# family = "Fira Code Retina"
+# __end__
+
+[colors.primary]
+foreground = "#406080"
+background = "#f2ffe6"
+
+[colors.selection]
+foreground = "CellForeground"
+background = "#cef2aa"
+
+[colors.search.matches]
+foreground = "#203040"
+background = "#b4ffb4"
+
+[colors.search.focused_match]
+foreground = "#203040"
+background = "#ffb870"
+
+[colors.normal]
+black = "#406080"
+red = "#e61818"
+green = "#008020"
+yellow = "#806000"
+blue = "#2828cc"
+magenta = "#c030c0"
+cyan = "#007272"
+white = "#6090c0"
+
+[colors.bright]
+black = "#406080"
+red = "#e61818"
+green = "#008020"
+yellow = "#806000"
+blue = "#2828cc"
+magenta = "#c030c0"
+cyan = "#007272"
+white = "#6090c0"
