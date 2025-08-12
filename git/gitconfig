@@ -1,0 +1,30 @@
+[user]
+    name = DF_XYZ
+    email = dfxyz1@gmail.com
+
+[init]
+    defaultBranch = master
+
+[core]
+    autocrlf = input
+    quotePath = false
+
+[push]
+    default = simple
+
+[alias]
+    br = branch
+    co = checkout
+    cm = commit
+    amd = commit --amend
+    lg = log --graph --format='%C(blue)%h %C(green)%ci %C(yellow)%an%C(red)%d\n%s\n%b\n'
+    lg1 = lg -1
+    lga = lg --all
+    mg = merge --no-ff
+    pf = push -f
+    st = status
+# __[option(proxy)]__
+#
+# [http]
+#     proxy = http://127.0.0.1:3000/
+# __end__
