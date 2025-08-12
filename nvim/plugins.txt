@@ -1,0 +1,4 @@
+https://github.com/dfxyz/CandyPaper.vim.git
+https://github.com/preservim/nerdtree.git
+https://github.com/easymotion/vim-easymotion.git
+https://github.com/justinmk/vim-sneak.git
