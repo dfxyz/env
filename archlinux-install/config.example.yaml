@@ -1,0 +1,62 @@
+hostname: DF-XYZ-PC
+timezone: Asia/Shanghai
+locale: zh_CN.UTF-8
+locales: ['zh_CN.UTF-8', 'en_US.UTF-8']
+
+defaultAccount:
+  username: dfxyz
+  comment: DF_XYZ
+  password: youCan'tSeeMe
+  extraGroups: wheel,render,video
+  autoLogin: true
+
+fstab:
+  local:
+    - uuid: AAAAAAAA-BBBB-CCCC-DDDD-EEEEFFFFFFFF
+      mountPoint: /
+      fsType: ext4
+      options: rw,relatime,discard
+      dump: 0
+      pass: 1
+    - uuid: ABCD-1234
+      mountPoint: /boot
+      fsType: vfat
+      options: rw,relatime,utf8,umask=0022,errors=remount-ro
+      dump: 0
+      pass: 2
+    - uuid: ABCDEF0123456789
+      mountPoint: /data
+      fsType: ntfs3
+      options: rw,relatime,windows_names,uid=1000,gid=1000,umask=0022
+      dump: 0
+      pass: 0
+  remote:
+    ip: 192.168.0.100
+    username: dfxyz
+    password: youCan'tSeeMe
+    mountRoot: /nas
+    options: rw,relatime,vers=3.0,uid=1000,gid=1000,file_mode=0755,dir_mode=0755
+    dirs: [remoteData0, remoteData1]
+
+fontPreferences:
+  sans-serif: Noto Sans CJK SC
+  serif: Noto Serif CJK SC
+  monospace: ['Fira Code', 'Noto Sans Mono CJK SC']
+
+enableServices:
+  - bluetooth
+  - NetworkManager
+  - systemd-timesyncd
+  - sddm
+
+createEfiBootStub:
+  enable: false
+  label: Arch Linux
+  disk: /dev/nvme0n1
+  part: 1
+  loader: /vmlinuz-linux
+  extraArgs:
+    - root=UUID=AAAAAAAA-BBBB-CCCC-DDDD-EEEEFFFFFFFF
+    - initrd=\initramfs-linux.img
+    - rw
+    - loglevel=4

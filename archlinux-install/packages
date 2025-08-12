@@ -1,0 +1,40 @@
+# essential packages
+base base-devel linux linux-firmware networkmanager
+amd-ucode cifs-utils dosfstools e2fsprogs ntfs-3g
+
+# shell and terminal emulator
+zsh alacritty grml-zsh-config
+
+# text editor
+neovim neovide xclip xsel wl-clipboard
+
+# input method
+fcitx5 fcitx5-rime fcitx5-qt fcitx5-gtk fcitx5-configtool
+
+# web browser
+firefox firefox-i18n-zh-cn
+
+# audio and video players
+audacious mpv
+
+# fonts
+noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-fira-code
+
+# common cli tools
+curl diffutils efibootmgr ffmpeg git less man-db man-pages openssh openssl rsync wget xdg-utils yt-dlp
+
+# plasma desktop environment
+wayland plasma
+
+# basic kde applications
+dolphin dolphin-plugins ffmpegthumbs kdegraphics-thumbnailers filelight kfind kompare krename
+konsole
+ark zip unzip 7zip unrar
+gwenview kimageformats qt6-imageformats
+okular
+
+# other kde applications and components
+colord-kde kcalc kcharselect kcolorchooser khelpcenter kjournald ksystemlog kwalletmanager partitionmanager
+kio kio-admin kio-extras kio-fuse kio-zeroconf
+baloo baloo-widgets kde-inotify-survey
+xdg-desktop-portal xdg-desktop-portal-gtk xsettingsd
