@@ -1,0 +1,15 @@
+[Desktop Entry]
+DefaultProfile=konsole.profile
+
+[General]
+ConfigVersion=1
+
+[KonsoleWindow]
+RememberWindowSize=false
+
+[TabBar]
+CloseTabButton=None
+CloseTabOnMiddleMouseButton=true
+SearchTabsButton=HideSearchTabsButton
+TabBarPosition=Bottom
+TabBarVisibility=AlwaysShowTabBar
