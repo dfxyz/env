@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Name=Windsurf
+Comment=Windsurf Editor
+Exec=/opt/Windsurf/bin/windsurf
+Icon=/opt/Windsurf/resources/app/resources/linux/code.png
+Categories=Utility;Development;
+MimeType=inode/directory;
