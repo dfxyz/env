@@ -1,0 +1,22 @@
+# vim: ft=zsh et ts=4 sw=0 fdm=marker
+
+export LANG='zh_CN.UTF-8'
+export EDITOR='nvim'
+export PAGER='less'
+
+# __[option(linux)]__
+# export PATH="$PATH:$HOME/.local/bin"
+# export XMODIFIERS=@im=fcitx
+# __end__
+# __[option(windows)]__
+# export CHERE_INVOKING=1
+# export MSYS=winsymlinks:nativestrict
+# export MSYS2_PATH_TYPE=inherit
+# export MSYSTEM=UCRT64
+# __end__
+
+# __[option(proxy)]__
+# export HTTP_PROXY=http://127.0.0.1:3000/
+# export HTTPS_PROXY=http://127.0.0.1:3000/
+# export NO_PROXY='localhost,127.0.0.1,::1,192.168.0.0/16'
+# __end__

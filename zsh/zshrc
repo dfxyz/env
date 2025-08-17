@@ -1,0 +1,146 @@
+# vim: ft=zsh et ts=4 sw=0 fdm=marker
+
+# prompt customization {{{
+
+zstyle ':prompt:grml:left:setup' items rc user at host path vcs newline percent
+zstyle ':prompt:grml:right:setup' use-rprompt false
+
+zstyle ':prompt:grml:left:items:rc' pre '%F{red}'
+if [[ $EUID > 0 ]]; then
+    zstyle ':prompt:grml:left:items:user' pre '%F{green}'
+else
+    zstyle ':prompt:grml:left:items:user' pre '%F{red}'
+fi
+zstyle ':prompt:grml:left:items:user' post ''
+zstyle ':prompt:grml:left:items:host' post '%f'
+zstyle ':prompt:grml:left:items:path' pre '%F{yellow}'
+zstyle ':prompt:grml:left:items:path' post '%f'
+
+grml_prompt_token_default[path]='%60<..<%~%<< '
+
+zstyle ':vcs_info:*' formats "(%F{cyan}%s%f:%F{magenta}%b%f)" "zsh: %r"
+zstyle ':vcs_info:*' actionformats "(%F{cyan}%s%f:%F{magenta}%b%f|%F{red}%a%f)" "zsh: %r"
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat "%b%f:%F{yellow}%r"
+
+# }}}
+
+# command aliases and helper functions {{{
+[[ $EUID > 0 && "$(uname -s)" == "Linux" ]] && sudoAvailable=1 || sudoAvailable=0
+function sudoAlias() {
+    if [[ $sudoAvailable != 0 ]]; then
+        salias $1
+    else
+        alias $1
+    fi
+}
+[[ $sudoAvailable != 0 ]] && alias sudo='sudo '
+
+alias vi=nvim
+alias vim=nvim
+alias gvi=neovide
+alias gvim=neovide
+
+alias diff='diff --color=auto'
+
+alias dirs='dirs -v'
+
+sudoAlias paci='pacman -S'
+sudoAlias pacy='pacman -Sy'
+sudoAlias pacu='pacman -Syu'
+sudoAlias pacr='pacman -Rsn'
+alias pacs='pacman -Ss'
+alias pacsi='pacman -Si'
+alias pacsg='pacman -Sg'
+alias pacl='pacman -Ql | awk "{print \$1}" | uniq | less'
+alias pacq='pacman -Qs'
+alias pacqi='pacman -Qi'
+alias pacqg='pacman -Qg'
+alias pacqo='pacman -Qo'
+alias pacfy='pacman -Fy'
+alias pacfl='pacman -Fl'
+
+sudoAlias sc='systemctl'
+
+alias sshe="$EDITOR ~/.ssh/config"
+# sshl {{{
+function sshl() {
+    if [[ ! -e ~/.ssh/config ]]; then
+        echo "no ssh endpoints"
+        return
+    fi
+    awk '
+    function output() {
+        if (host && hostname) {
+            empty = 0
+            printf("- \033[01;34m%s\033[0m (", host)
+            if (user) {
+                printf("%s@", user)
+            }
+            printf("%s", hostname)
+            if (port) {
+                printf(":%s", port)
+            }
+            printf(")\n")
+        }
+        host = ""
+        hostname = ""
+        user = ""
+        port = ""
+    }
+
+    BEGIN { IGNORECASE = 1 }
+
+    /^host\s+/ {
+        output()
+        host = $2
+        next
+    }
+
+    /^\s*hostname\s+/ {
+        hostname = $2
+        next
+    }
+
+    /^\s*user\s+/ {
+        user = $2
+        next
+    }
+
+    /^\s*port\s+/ {
+        user = $2
+        next
+    }
+
+    END {
+        output()
+        if (empty) {
+            print "no ssh endpoints"
+        }
+    }
+    ' ~/.ssh/config
+}
+
+# }}}
+
+unset sudoAvailable sudoAlias
+# }}}
+
+# misc {{{
+
+# disable flow control
+stty -ixon -ixoff
+
+# disable filename generation with '#', '~' or '^' as part of patterns
+setopt no_extended_glob
+
+# __[option(windows)]__
+# # enable drive completion on Windows
+# DRIVES=$(mount | sed -n 's|^[A-Z]: on /\([a-z]\).*|\1|p')
+# zstyle ':completion:*' fake-files /: "/:$DRIVES"
+# unset DRIVES
+# __end__
+
+# use CandyPaper's 'searchMatchedText' color for standout text
+export LESS_TERMCAP_so=$'\E[38;2;32;48;64;48;2;180;255;180m'
+
+# }}}
