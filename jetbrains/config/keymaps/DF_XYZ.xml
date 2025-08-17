@@ -1,0 +1,26 @@
+<keymap version="1" name="DF_XYZ" parent="$default">
+  <action id="CallInlineCompletionAction">
+    <keyboard-shortcut first-keystroke="alt back_slash" />
+  </action>
+  <action id="CollapseSelection" />
+  <action id="EditorMoveToPageBottom" />
+  <action id="EditorMoveToPageTop" />
+  <action id="EditorScrollDown" />
+  <action id="EditorScrollUp" />
+  <action id="InsertInlineCompletionLineAction">
+    <keyboard-shortcut first-keystroke="ctrl down" />
+  </action>
+  <action id="MainMenuButton.ShowMenu" />
+  <action id="NextTab">
+    <keyboard-shortcut first-keystroke="alt right" />
+    <keyboard-shortcut first-keystroke="ctrl page_down" />
+  </action>
+  <action id="PreviousTab">
+    <keyboard-shortcut first-keystroke="alt left" />
+    <keyboard-shortcut first-keystroke="ctrl page_up" />
+  </action>
+  <action id="ShowIntentionActions">
+    <keyboard-shortcut first-keystroke="alt enter" />
+    <keyboard-shortcut first-keystroke="ctrl period" />
+  </action>
+</keymap>

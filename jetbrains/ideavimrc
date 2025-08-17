@@ -1,0 +1,21 @@
+set clipboard=unnamed,unnamedplus
+set easymotion sneak
+set incsearch hlsearch
+set ideajoin
+set visualbell
+
+nnoremap Y y$
+vnoremap p "_dgP
+vnoremap P "_dgP
+vnoremap <c-c> y
+vmap S <plug>Sneak_S
+map <leader> <plug>(easymotion-prefix)
+nmap <leader>s <plug>(easymotion-f2)
+vmap <leader>s <plug>(easymotion-f2)
+nmap <leader>S <plug>(easymotion-F2)
+vmap <leader>S <plug>(easymotion-F2)
+
+sethandler <c-e> a:ide
+sethandler <c-f> a:ide
+sethandler <c-s> a:ide
+sethandler <c-v> a:ide
