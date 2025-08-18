@@ -1,0 +1,101 @@
+{
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": [],
+    "copyFormatting": "none",
+    "copyOnSelect": true,
+    "defaultProfile": "{deadbeef-1234-5678-90ab-cdefcafebabe}",
+    "initialCols": 125,
+    "initialRows": 40,
+    "keybindings": 
+    [
+        {
+            "id": "Terminal.CopyToClipboard",
+            "keys": "ctrl+c"
+        },
+        {
+            "id": "Terminal.PasteFromClipboard",
+            "keys": "ctrl+v"
+        },
+        {
+            "id": "Terminal.FindText",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "id": "Terminal.DuplicatePaneAuto",
+            "keys": "alt+shift+d"
+        }
+    ],
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles": 
+    {
+        "defaults": 
+        {
+            "adjustIndistinguishableColors": "indexed",
+            "closeOnExit": "always",
+            "colorScheme": "Candy Paper",
+            "cursorShape": "filledBox",
+            "font": 
+            {
+                "face": "Fira Code Retina",
+                "size": 11
+            },
+            "intenseTextStyle": "bold"
+        },
+        "list": 
+        [
+            {
+                "commandline": "zsh.exe",
+                "guid": "{deadbeef-1234-5678-90ab-cdefcafebabe}",
+                "hidden": false,
+                "name": "zsh",
+                "pathTranslationStyle": "msys2"
+            },
+            {
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "Windows PowerShell"
+            },
+            {
+                "commandline": "%SystemRoot%\\System32\\cmd.exe",
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": false,
+                "name": "\u547d\u4ee4\u63d0\u793a\u7b26"
+            }
+        ]
+    },
+    "schemes": 
+    [
+        {
+            "background": "#F2FFE6",
+            "black": "#406080",
+            "blue": "#2828CC",
+            "brightBlack": "#406080",
+            "brightBlue": "#2828CC",
+            "brightCyan": "#007272",
+            "brightGreen": "#008020",
+            "brightPurple": "#C030C0",
+            "brightRed": "#E61818",
+            "brightWhite": "#6090C0",
+            "brightYellow": "#806000",
+            "cursorColor": "#406080",
+            "cyan": "#007272",
+            "foreground": "#406080",
+            "green": "#008020",
+            "name": "Candy Paper",
+            "purple": "#C030C0",
+            "red": "#E61818",
+            "selectionBackground": "#CEF2AA",
+            "white": "#6090C0",
+            "yellow": "#806000"
+        }
+    ],
+    "theme": "system",
+    "themes": []
+}
