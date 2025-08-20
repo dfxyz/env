@@ -1,0 +1,68 @@
+<gui name="dolphin" version="1">
+  <ActionProperties>
+    <Action name="open_kcommand_bar" shortcut="Ctrl+Alt+I; Ctrl+Shift+P"/>
+    <Action name="hamburger_menu" shortcut="F10; "/>
+    <Action name="file_new" shortcut="Ctrl+Shift+N"/>
+    <Action name="new_tab" shortcut="Ctrl+T; F4"/>
+    <Action name="file_close" shortcut="Ctrl+W; "/>
+    <Action name="edit_undo" shortcut="Ctrl+Z"/>
+    <Action name="edit_cut" shortcut="Ctrl+X"/>
+    <Action name="edit_copy" shortcut="Ctrl+C; Ctrl+Ins"/>
+    <Action name="edit_paste" shortcut="Ctrl+V; Shift+Ins"/>
+    <Action name="copy_to_inactive_split_view" shortcut="F5"/>
+    <Action name="move_to_inactive_split_view" shortcut="F6"/>
+    <Action name="show_filter_bar" shortcut="Ctrl+I; /"/>
+    <Action name="edit_find" shortcut="Ctrl+F"/>
+    <Action name="toggle_selection_mode" shortcut="Space"/>
+    <Action name="edit_select_all" shortcut="Ctrl+A"/>
+    <Action name="invert_selection" shortcut="Ctrl+Shift+A"/>
+    <Action name="act_as_admin" shortcut="Ctrl+Alt+Shift+A"/>
+    <Action name="split_view_menu" shortcut="; "/>
+    <Action name="view_redisplay" shortcut="Ctrl+R; "/>
+    <Action name="replace_location" shortcut="Ctrl+L; "/>
+    <Action name="go_back" shortcut="Backspace; Alt+Left; Back"/>
+    <Action name="undo_close_tab" shortcut="Ctrl+Shift+T"/>
+    <Action name="go_forward" shortcut="Alt+Right; "/>
+    <Action name="go_up" shortcut="Alt+Up"/>
+    <Action name="go_home" shortcut="Ctrl+Home; "/>
+    <Action name="open_preferred_search_tool" shortcut="Ctrl+Shift+F"/>
+    <Action name="open_terminal" shortcut="F9; "/>
+    <Action name="open_terminal_here" shortcut="Shift+F9"/>
+    <Action name="options_show_menubar" shortcut="; "/>
+    <Action name="options_configure_keybinding" shortcut="Ctrl+Alt+,"/>
+    <Action name="options_configure" shortcut="Ctrl+Shift+,"/>
+    <Action name="activate_tab_0" shortcut="Alt+1"/>
+    <Action name="activate_tab_1" shortcut="Alt+2"/>
+    <Action name="activate_tab_2" shortcut="Alt+3"/>
+    <Action name="activate_tab_3" shortcut="Alt+4"/>
+    <Action name="activate_tab_4" shortcut="Alt+5"/>
+    <Action name="activate_tab_5" shortcut="Alt+6"/>
+    <Action name="activate_tab_6" shortcut="Alt+7"/>
+    <Action name="activate_tab_7" shortcut="Alt+8"/>
+    <Action name="activate_tab_8" shortcut="Alt+9"/>
+    <Action name="activate_last_tab" shortcut="Alt+0"/>
+    <Action name="activate_next_tab" shortcut="Ctrl+PgDown; ; Ctrl+Tab"/>
+    <Action name="activate_prev_tab" shortcut="Ctrl+PgUp; ; Ctrl+Shift+Tab"/>
+    <Action name="create_dir" shortcut="F7; "/>
+    <Action name="create_file" shortcut="Shift+F4"/>
+    <Action name="renamefile" shortcut="F2; Shift+F6"/>
+    <Action name="movetotrash" shortcut="Del; F8"/>
+    <Action name="deletefile" shortcut="Shift+Del; Shift+F8"/>
+    <Action name="delete_shortcut" shortcut="Del; F8"/>
+    <Action name="duplicate" shortcut="Shift+F5"/>
+    <Action name="properties" shortcut="Alt+Return; "/>
+    <Action name="copy_location" shortcut="Ctrl+Alt+C"/>
+    <Action name="icons" shortcut="Ctrl+1"/>
+    <Action name="compact" shortcut="Ctrl+2"/>
+    <Action name="details" shortcut="Ctrl+3"/>
+    <Action name="view_zoom_in" shortcut="Ctrl++; Ctrl+="/>
+    <Action name="view_zoom_reset" shortcut="Ctrl+0"/>
+    <Action name="view_zoom_out" shortcut="Ctrl+-"/>
+    <Action name="show_hidden_files" shortcut="Ctrl+H; Ctrl+."/>
+    <Action name="show_folders_panel" shortcut="; "/>
+    <Action name="show_terminal_panel" shortcut="Ctrl+K; "/>
+    <Action name="show_places_panel" shortcut="F3; "/>
+    <Action name="focus_places_panel" shortcut="; "/>
+    <Action name="help_contents" shortcut="F1"/>
+  </ActionProperties>
+</gui>

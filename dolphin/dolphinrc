@@ -1,0 +1,23 @@
+[ContentDisplay]
+UseShortRelativeDates=false
+
+[General]
+DoubleClickViewAction=go_up
+OpenExternallyCalledFolderInNewTab=true
+SplitView=true
+UseTabForSwitchingSplitView=true
+Version=202
+ViewPropsTimestamp=2025,8,9,19,44,55.361
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[MainWindow]
+MenuBar=Disabled
+
+[PreviewSettings]
+Plugins=appimagethumbnail,blenderthumbnail,comicbookthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,jxl,jpegthumbnail,kraorathumbnail,windowsimagethumbnail,windowsexethumbnail,mobithumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,librsvg,svgthumbnail,gdk-pixbuf-thumbnailer,cursorthumbnail,imagethumbnail,fontthumbnail,directorythumbnail,ffmpegthumbs,audiothumbnail
+
+[Shortcut Schemes]
+Current Scheme=dolphin_shortcuts
