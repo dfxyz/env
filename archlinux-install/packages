@@ -3,7 +3,7 @@ base base-devel linux linux-firmware networkmanager
 amd-ucode cifs-utils dosfstools e2fsprogs ntfs-3g
 
 # shell and terminal emulator
-zsh alacritty grml-zsh-config
+zsh alacritty
 
 # text editor
 neovim neovide xclip xsel wl-clipboard

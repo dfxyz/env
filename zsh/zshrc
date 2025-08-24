@@ -1,53 +1,159 @@
-# vim: ft=zsh et ts=4 sw=0 fdm=marker
+# vim: et ts=2 sw=0 fdm=marker fmr=[[[,]]]
 
-# prompt customization {{{
+# zsh options [[[
+zshOptions=(
+  # changing directories
+  autoCd
+  autoPushd
+  pushdIgnoreDups
+  pushdSilent
+  pushdToHome
 
-zstyle ':prompt:grml:left:setup' items rc user at host path vcs newline percent
-zstyle ':prompt:grml:right:setup' use-rprompt false
+  # completion
+  completeInWord
+  listRowsFirst
 
-zstyle ':prompt:grml:left:items:rc' pre '%F{red}'
-if [[ $EUID > 0 ]]; then
-    zstyle ':prompt:grml:left:items:user' pre '%F{green}'
-else
-    zstyle ':prompt:grml:left:items:user' pre '%F{red}'
-fi
-zstyle ':prompt:grml:left:items:user' post ''
-zstyle ':prompt:grml:left:items:host' post '%f'
-zstyle ':prompt:grml:left:items:path' pre '%F{yellow}'
-zstyle ':prompt:grml:left:items:path' post '%f'
+  # history
+  appendHistory
+  extendedHistory
+  histIgnoreSpace
+  shareHistory
 
-grml_prompt_token_default[path]='%60<..<%~%<< '
+  # i/o
+  correct
+  noFlowControl
+  printExitValue
 
-zstyle ':vcs_info:*' formats "(%F{cyan}%s%f:%F{magenta}%b%f)" "zsh: %r"
-zstyle ':vcs_info:*' actionformats "(%F{cyan}%s%f:%F{magenta}%b%f|%F{red}%a%f)" "zsh: %r"
+  # job control
+  nohup
+  longListJobs
+)
+for option in $zshOptions; do
+  setopt $option
+done
+unset option
+# ]]]
+
+# prompt [[[
+PS2='\`%_> '
+PS3='?# '
+PS4='+%N:%i:%_> '
+
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' formats "(%F{cyan}%s%f:%F{magenta}%b%f)"
+zstyle ':vcs_info:*' actionformats "(%F{cyan}%s%f:%F{magenta}%b%f|%F{red}%a%f)"
 zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat "%b%f:%F{yellow}%r"
 
-# }}}
+function precmd() {
+  vcs_info
 
-# command aliases and helper functions {{{
-[[ $EUID > 0 && "$(uname -s)" == "Linux" ]] && sudoAvailable=1 || sudoAvailable=0
-function sudoAlias() {
-    if [[ $sudoAvailable != 0 ]]; then
-        salias $1
-    else
-        alias $1
-    fi
+  printf $'\e]0;'
+  printf "${(%):-"%n@%m: %~"}"
+  printf $'\a'
+
+  if (( EUID == 0 )); then
+    PS1="%F{red}%n@%m%f"
+  else
+    PS1="%F{green}%n@%m%f"
+  fi
+  PS1="${PS1} %F{yellow}%~%f"
+  if [[ -n ${vcs_info_msg_0_} ]]; then
+    PS1="${PS1} ${vcs_info_msg_0_}"
+  fi
+  PS1=${PS1}$'\n%# '
 }
-[[ $sudoAvailable != 0 ]] && alias sudo='sudo '
+# ]]]
+
+# key bindings [[[
+bindkey -e
+
+bindkey '^[[2~' overwrite-mode # <Insert>
+bindkey '^[[3~' delete-char # <Delete>
+bindkey '^[[A' up-line-or-search # <Up>
+bindkey '^[[B' down-line-or-search # <Down>
+bindkey '^[[1;5D' backward-word # <Ctrl-Left>
+bindkey '^[[1;5C' forward-word # <Ctrl-Right>
+
+zmodload zsh/complist
+bindkey -M menuselect '^[[Z' reverse-menu-complete # <Shift-Tab>
+bindkey -M menuselect '^M' .accept-line # <Enter>
+
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end  history-search-end
+bindkey '^[[5~' history-beginning-search-backward-end # <PageUp>
+bindkey '^[[6~' history-beginning-search-forward-end # <PageDown>
+
+# beginning/end of line/buffer/history
+function _beginningOrEndOfSomewhere () {
+  local hno=$HISTNO
+  if [[ ( "${LBUFFER[-1]}" == $'\n' && "${WIDGET}" == beginning-* ) || \
+    ( "${RBUFFER[1]}" == $'\n' && "${WIDGET}" == end-* ) ]]; then
+    zle .${WIDGET:s/somewhere/buffer-or-history/} "$@"
+  else
+    zle .${WIDGET:s/somewhere/line-hist/} "$@"
+    if (( HISTNO != hno )); then
+      zle .${WIDGET:s/somewhere/buffer-or-history/} "$@"
+    fi
+  fi
+}
+zle -N beginning-of-somewhere _beginningOrEndOfSomewhere
+zle -N end-of-somewhere _beginningOrEndOfSomewhere
+bindkey '^[[H' beginning-of-somewhere # <Home>
+bindkey '^[[F' end-of-somewhere # <End>
+
+function _toggleForeground() {
+  if (( ${#jobstates} )); then
+    zle .push-input
+    BUFFER=" fg"
+    zle .accept-line
+  else
+    zle -M 'no background jobs'
+  fi
+}
+zle -N toggle-foreground _toggleForeground
+bindkey '^z' toggle-foreground
+# ]]]
+
+# aliases and functions [[[
+if [[ "$(uname -s)" == 'Linux' && $EUID != 0 ]]; then
+alias sudo='sudo '
+function salias() {
+  local k="${1%%\=*}"
+  local v="${1#*\=}"
+  alias -- "$k=sudo $v"
+}
+else
+alias salias=alias
+fi
+
+alias ...='cd ../../'
+
+function d() {
+  if [[ -n $1 ]]; then
+    pushd +$1
+    return $?
+  fi
+  dirs -v
+}
+
+alias ls='ls --color=auto -v'
+alias ll='ls -l'
+alias la='ls -al'
+
+alias diff='diff --color=auto -u'
+alias grep='grep --color=auto'
+alias ip='ip -color=auto'
 
 alias vi=nvim
 alias vim=nvim
 alias gvi=neovide
 alias gvim=neovide
 
-alias diff='diff --color=auto'
-
-alias dirs='dirs -v'
-
-sudoAlias paci='pacman -S'
-sudoAlias pacy='pacman -Sy'
-sudoAlias pacu='pacman -Syu'
-sudoAlias pacr='pacman -Rsn'
+salias paci='pacman -S'
+salias pacy='pacman -Sy'
+salias pacu='pacman -Syu'
+salias pacr='pacman -Rsn'
 alias pacs='pacman -Ss'
 alias pacsi='pacman -Si'
 alias pacsg='pacman -Sg'
@@ -59,88 +165,194 @@ alias pacqo='pacman -Qo'
 alias pacfy='pacman -Fy'
 alias pacfl='pacman -Fl'
 
-sudoAlias sc='systemctl'
-
 alias sshe="$EDITOR ~/.ssh/config"
-# sshl {{{
-function sshl() {
-    if [[ ! -e ~/.ssh/config ]]; then
-        echo "no ssh endpoints"
-        return
-    fi
-    awk '
-    function output() {
-        if (host && hostname) {
-            empty = 0
-            printf("- \033[01;34m%s\033[0m (", host)
-            if (user) {
-                printf("%s@", user)
-            }
-            printf("%s", hostname)
-            if (port) {
-                printf(":%s", port)
-            }
-            printf(")\n")
-        }
-        host = ""
-        hostname = ""
-        user = ""
-        port = ""
-    }
+function sshl() { # [[[
+  if [[ ! -e ~/.ssh/config ]]; then
+      echo "no ssh endpoints"
+      return
+  fi
+  awk '
+  function output() {
+      if (host && hostname) {
+          empty = 0
+          printf("- \033[1;34m%s\033[0m (", host)
+          if (user) {
+              printf("%s@", user)
+          }
+          printf("%s", hostname)
+          if (port) {
+              printf(":%s", port)
+          }
+          printf(")\n")
+      }
+      host = ""
+      hostname = ""
+      user = ""
+      port = ""
+  }
 
-    BEGIN { IGNORECASE = 1 }
+  BEGIN { IGNORECASE = 1 }
 
-    /^host\s+/ {
-        output()
-        host = $2
-        next
-    }
+  /^host\s+/ {
+      output()
+      host = $2
+      next
+  }
 
-    /^\s*hostname\s+/ {
-        hostname = $2
-        next
-    }
+  /^\s*hostname\s+/ {
+      hostname = $2
+      next
+  }
 
-    /^\s*user\s+/ {
-        user = $2
-        next
-    }
+  /^\s*user\s+/ {
+      user = $2
+      next
+  }
 
-    /^\s*port\s+/ {
-        user = $2
-        next
-    }
+  /^\s*port\s+/ {
+      port = $2
+      next
+  }
 
-    END {
-        output()
-        if (empty) {
-            print "no ssh endpoints"
-        }
-    }
-    ' ~/.ssh/config
+  END {
+      output()
+      if (empty) {
+          print "no ssh endpoints"
+      }
+  }
+  ' ~/.ssh/config
+} # ]]]
+# ]]]
+
+# persistent dirstack [[[
+DIRSTACKSIZE=20
+DIRSTACKFILE=$HOME/.zdirs
+
+typeset -gaU PERSISTENT_DIRSTACK
+
+function chpwd () {
+  (( ZSH_SUBSHELL )) && return
+  PERSISTENT_DIRSTACK=($PWD "${(@)PERSISTENT_DIRSTACK[1,$DIRSTACKSIZE]}")
+  builtin print -l ${PERSISTENT_DIRSTACK} >! ${DIRSTACKFILE}
 }
 
-# }}}
+if [[ -f ${DIRSTACKFILE} ]]; then
+  # enabling NULL_GLOB via (N) weeds out any non-existing directories from the saved dir-stack file.
+  dirstack=( ${(f)"$(< $DIRSTACKFILE)"}(N) )
+  # "cd -" won't work after login by just setting $OLDPWD, so
+  [[ -d $dirstack[0] ]] && cd -q $dirstack[0] && cd -q $OLDPWD
+fi
+PERSISTENT_DIRSTACK=( "${dirstack[@]}" )
+#]]]
 
-unset sudoAvailable sudoAlias
-# }}}
+# misc [[[
 
-# misc {{{
+# history
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=5000
+SAVEHIST=10000
 
-# disable flow control
-stty -ixon -ixoff
+# ls color setup
+[[ -n "$(command -v dircolors)" ]] && eval $(dircolors -b)
 
-# disable filename generation with '#', '~' or '^' as part of patterns
-setopt no_extended_glob
+# less color setup
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[38;2;32;48;64;48;2;180;255;180m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+
+# report the cpu/system/user time of command if running longer than 5 seconds
+REPORTTIME=5
+
+# remove duplicates from those arrays
+typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
+
+# ]]]
+
+# completion [[[
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' menu select=5
+zstyle ':completion:*' verbose true
+
+zstyle ':completion:*:matches' group true
+zstyle ':completion:*' group-name ''
+
+zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*:descriptions' format $'%{\e[0;32m%}completing %B%d%b:%{\e[0m%}'
+zstyle ':completion:*:warnings' format $'%{\e[0;31m%}no matches for:%{\e[0m%} %d'
+
+zstyle ':completion::(^approximate*):*:functions' ignored-patterns '_*'
+
+zstyle ':completion:*:approximate:' max-errors 'reply=( $((($#PREFIX+$#SUFFIX)/3 )) numeric )'
+
+zstyle ':completion:*:-command-:*:' verbose false
+zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
+
+zstyle ':completion:correct:' prompt 'correct to: %e'
+zstyle ':completion:*:correct:*' insert-unambiguous true
+zstyle ':completion:*:correct:*' original true
+zstyle ':completion:*:corrections' format $'%{\e[0;31m%}%d:%{\e[0m%}'
+
+zstyle ':completion:*:expand:*' tag-order all-expansions
 
 # __[option(windows)]__
-# # enable drive completion on Windows
-# DRIVES=$(mount | sed -n 's|^[A-Z]: on /\([a-z]\).*|\1|p')
-# zstyle ':completion:*' fake-files /: "/:$DRIVES"
-# unset DRIVES
+# zstyle ':completion:*' fake-files /: "/:$(mount | sed -n 's|^[A-Z]: on /\([a-z]\).*|\1|p')"
+#
 # __end__
+zstyle ':completion:*:history-words' list false
+zstyle ':completion:*:history-words' menu true
+zstyle ':completion:*:history-words' remove-all-dups true
+zstyle ':completion:*:history-words' stop true
 
-# use CandyPaper's 'searchMatchedText' color for standout text
-export LESS_TERMCAP_so=$'\E[38;2;32;48;64;48;2;180;255;180m'
+zstyle ':completion:*:messages' format '%d'
 
-# }}}
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:options' description true
+
+zstyle ':completion:*:processes' command 'ps -au$USER'
+zstyle ':completion:*:processes-names' command 'ps c -u ${USER} -o command | uniq'
+
+zstyle ':completion:*:man:*' menu true select
+zstyle ':completion:*:manuals' separate-sections true
+zstyle ':completion:*:manuals.*' insert-sections true
+
+zstyle ':completion:*' special-dirs ..
+
+zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+
+_ssh_config_hosts=()
+if [[ -r ~/.ssh/config ]]; then
+  _ssh_config_hosts=(${${(s: :)${(ps:\t:)${${(@M)${(f)"$(<$HOME/.ssh/config)"}:#Host *}#Host }}}:#*[*?]*})
+fi
+_ssh_hosts=()
+if [[ -r ~/.ssh/known_hosts ]]; then
+  _ssh_known_hosts=(${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[\|]*}%%\ *}%%,*})
+fi
+_complete_hosts=(
+    localhost
+    "$_ssh_config_hosts[@]"
+    "$_ssh_known_hosts[@]"
+)
+zstyle ':completion:*:hosts' hosts $_complete_hosts
+
+function _force_rehash () {
+    (( CURRENT == 1 )) && rehash
+    return 1
+}
+zstyle -e ':completion:*' completer '
+  if [[ $_last_try != "$HISTNO$BUFFER$CURSOR" ]]; then
+    _last_try="$HISTNO$BUFFER$CURSOR"
+    reply=(_complete _match _ignored _prefix _files)
+  else
+    if [[ $words[1] == (rm|mv) ]]; then
+      reply=(_complete _files)
+    else
+      reply=(_oldlist _expand _force_rehash _complete _ignored _correct _approximate _files)
+    fi
+  fi'
+# ]]]
