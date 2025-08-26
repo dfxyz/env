@@ -84,6 +84,8 @@ vmap <down> gj
 imap <down> <c-o>gj
 
 vnoremap S <plug>Sneak_S
+onoremap s <plug>Sneak_s
+onoremap S <plug>Sneak_S
 
 map <leader> <plug>(easymotion-prefix)
 nnoremap <leader>s <plug>(easymotion-f2)
