@@ -131,10 +131,15 @@ alias ...='cd ../../'
 
 function d() {
   if [[ -n $1 ]]; then
-    pushd +$1
+    if [[ $1 == -* ]]; then
+      pushd $1
+    else
+      pushd +$1
+    fi
     return $?
   fi
   dirs -v
+  return $?
 }
 
 alias ls='ls --color=auto -v'
