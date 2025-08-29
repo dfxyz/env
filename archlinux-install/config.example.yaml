@@ -41,7 +41,7 @@ fstab:
 fontPreferences:
   sans-serif: Noto Sans CJK SC
   serif: Noto Serif CJK SC
-  monospace: ['Fira Code', 'Noto Sans Mono CJK SC']
+  monospace: ['Fira Noto SC', 'Fira Code', 'Noto Sans Mono CJK SC']
 
 enableServices:
   - bluetooth

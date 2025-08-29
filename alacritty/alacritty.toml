@@ -35,15 +35,8 @@ key = "PageDown"
 mods = "Control|Shift"
 action = "ScrollPageDown"
 
-# __[option(linux)]__
-# [font.normal]
-# family = "Fira Code"
-# style = "Retina"
-# __end__
-# __[option(windows)]__
-# [font.normal]
-# family = "Fira Code Retina"
-# __end__
+[font.normal]
+family = "Fira Noto SC"
 
 [colors.primary]
 foreground = "#406080"

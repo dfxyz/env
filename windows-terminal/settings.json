@@ -7,7 +7,7 @@
     "defaultProfile": "{deadbeef-1234-5678-90ab-cdefcafebabe}",
     "initialCols": 125,
     "initialRows": 40,
-    "keybindings": 
+    "keybindings":
     [
         {
             "id": "Terminal.CopyToClipboard",
@@ -26,28 +26,28 @@
             "keys": "alt+shift+d"
         }
     ],
-    "newTabMenu": 
+    "newTabMenu":
     [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": 
+    "profiles":
     {
-        "defaults": 
+        "defaults":
         {
             "adjustIndistinguishableColors": "indexed",
             "closeOnExit": "always",
             "colorScheme": "Candy Paper",
             "cursorShape": "filledBox",
-            "font": 
+            "font":
             {
-                "face": "Fira Code Retina",
+                "face": "Fira Noto SC",
                 "size": 11
             },
             "intenseTextStyle": "bold"
         },
-        "list": 
+        "list":
         [
             {
                 "commandline": "zsh.exe",
@@ -70,7 +70,7 @@
             }
         ]
     },
-    "schemes": 
+    "schemes":
     [
         {
             "background": "#F2FFE6",

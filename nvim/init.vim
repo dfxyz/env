@@ -114,12 +114,7 @@ nnoremap <silent><m-z> :call <sid>toggleWrap()<cr>
 
 " Environment-dependent Overrides {{{
 if exists('g:neovide')
-  " __[option(windows)]__
-  " set guifont=Fira\ Code\ Retina,Noto\ Sans\ SC:h11
-  " __end__
-  " __[option(linux)]__
-  " set guifont=Fira\ Code\ Retina,Noto\ Sans\ CJK\ SC:h11
-  " __end__
+  set guifont=Fira\ Noto\ SC:h11
 endif
 
 if exists('g:vscode')

@@ -8,7 +8,7 @@ TerminalMargin=0
 [Appearance]
 BoldIntense=true
 ColorScheme=konsole
-Font=Fira Code,11,-1,5,450,0,0,0,0,0,0,0,0,0,0,1,Retina
+Font=Fira Noto SC,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 [Interaction Options]
 AutoCopySelectedText=true

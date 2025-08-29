@@ -7,7 +7,7 @@ global_ascii: true # 切换为 ascii 模式时，是否影响所有窗口
 style:
   color_scheme: candy_paper # 默认配色方案
 
-  font_face: 'Noto Sans SC' # 全局字体
+  font_face: 'Fira Noto SC' # 全局字体
   font_point: 11 # 全局字体字号
 
   inline_preedit: false # 行内显示预编辑区
