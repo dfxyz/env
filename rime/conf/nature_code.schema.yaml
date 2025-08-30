@@ -1,0 +1,91 @@
+schema:
+  schema_id: nature_code
+  name: 自然码
+  version: 0.1.0
+
+switches:
+  __include: default:/switches
+
+key_binder:
+  __include: default:/key_binder
+
+punctuator:
+  __include: default:/punctuator
+
+# 输入引擎
+engine:
+  processors:
+    - lua_processor@*processor__select_character # 拦截以词定字的相关按键
+    - ascii_composer # 拦截中英文状态切换相关按键
+    - recognizer # 拦截输入后符合特定模式的按键
+    - key_binder # 拦截处理自定义快捷键
+    - speller # 拦截处理字母表配置中的字符
+    - punctuator # 拦截处理用作标点符号的字符
+    - selector # 拦截处理用于定位候选词的按键
+    - navigator # 拦截处理用于光标移动的按键
+    - express_editor # 拦截处理空格、回车、退格等功能性按键
+  segmentors:
+    - ascii_segmentor # 标记所有ASCII字符分段为raw
+    - matcher # 标记匹配特定模式的字符片段
+    - abc_segmentor # 标记所有小写字母分段为abc
+    - punct_segmentor # 标记配置为标点符号的字符分段为punct
+    - fallback_segmentor # 标记剩余字符分段为raw
+  translators:
+    - punct_translator # 转换标点符号
+    - script_translator # 转换拼音
+    - lua_translator@*translator__unicode # 处理unicode输入
+    - lua_translator@*translator__gc # 触发Lua的垃圾回收
+  filters:
+    - simplifier@traditionalize # 简繁转换
+    - uniquifier # 去重
+
+# 词典设置
+translator:
+  dictionary: nature_code
+  enable_word_completion: true
+
+# 输入字符串模式识别
+recognizer:
+  patterns:
+    unicode: "^U[0-9a-f]+" # 使用unicode来输入字符
+
+# 映射自然码
+speller:
+  alphabet: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ # 大写字母用于混合输入
+  algebra:
+    - erase/^xx$/
+    - derive/^([aoe])([ioun])$/$1$1$2/
+    - xform/^([aoe])(ng)?$/$1$1$2/
+    - xform/iu$/Ｑ/
+    - xform/[iu]a$/Ｗ/
+    - xform/uan$/Ｒ/
+    - xform/[uv]e$/Ｔ/
+    - xform/ing$|uai$/Ｙ/
+    - xform/^sh/Ｕ/
+    - xform/^ch/Ｉ/
+    - xform/^zh/Ｖ/
+    - xform/uo$/Ｏ/
+    - xform/un$/Ｐ/
+    - xform/(.)i?ong$/$1Ｓ/
+    - xform/[iu]ang$/Ｄ/
+    - xform/(.)en$/$1Ｆ/
+    - xform/(.)eng$/$1Ｇ/
+    - xform/(.)ang$/$1Ｈ/
+    - xform/ian$/Ｍ/
+    - xform/(.)an$/$1Ｊ/
+    - xform/iao$/Ｃ/
+    - xform/(.)ao$/$1Ｋ/
+    - xform/(.)ai$/$1Ｌ/
+    - xform/(.)ei$/$1Ｚ/
+    - xform/ie$/Ｘ/
+    - xform/ui$/Ｖ/
+    - xform/(.)ou$/$1Ｂ/
+    - xform/in$/Ｎ/
+    - xlit/ＱＷＲＴＹＵＩＯＰＳＤＦＧＨＭＪＣＫＬＺＸＶＢＮ/qwrtyuiopsdfghmjcklzxvbn/
+
+# 简繁转换
+traditionalize:
+  option_name: traditionalization
+  opencc_config: s2t.json
+  tips: none
+  tags: [abc]

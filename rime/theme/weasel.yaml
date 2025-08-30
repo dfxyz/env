@@ -1,0 +1,68 @@
+config_version: '20250830'
+
+show_notifications: true # 是否显示状态变化的通知
+show_notifications_time: 500 # 通知显示的时间，单位 ms
+global_ascii: true # 切换为 ascii 模式时，是否影响所有窗口
+
+style:
+  color_scheme: candy_paper # 默认配色方案
+
+  font_face: 'Noto Sans SC' # 全局字体
+  font_point: 11 # 全局字体字号
+
+  inline_preedit: false # 行内显示预编辑区
+  preedit_type: composition # 预编辑区内容：composition（编码）； preview（选中的候选）；preview_all（全部候选）
+
+  fullscreen: false # 候选窗口全屏显示
+  horizontal: true # 候选项横排
+  vertical_text: false # 竖排文本
+
+  label_format: '%s.' # 标签字符：例如 %s. 效果为 1. 2. 3. ....
+  mark_text: '' # 标记字符，显示在选中的候选标签前，需要在配色方案中指定颜色；
+                # 如该项为空字符串而配色方案中 hilited_mark_color 非透明色，则显示 Windows 11 输入法风格标记
+  ascii_tip_follow_cursor: false # 切换 ASCII 模式时，提示跟随鼠标，而非输入光标
+  enhanced_position: true # 无法定位候选框时，在窗口左上角显示候选框：true；false
+  display_tray_icon: false # 托盘显示独立于语言栏的额外图标：true；false
+  antialias_mode: default # 次像素反锯齿设定：default；force_dword；cleartype；grayscale；aliased
+  candidate_abbreviate_length: 30 # 候选项略写，超过此数字则用省略号代替。设置为 0 则不启用此功能
+  hover_type: none # 鼠标在候选窗口悬停时：none（无动作）；hilite（选中鼠标下的候选）；semi_hilite（高亮鼠标下的候选）
+
+  paging_on_scroll: true # 在候选窗口上滑动滚轮的行为：true（翻页）；false （选中下一个候选）
+  click_to_capture: false # 鼠标点击候选项，创建截图：true；false
+
+  layout:
+    baseline: 0 # 字号百分比，与 linespacing 一同设置可解决字体跳动问题，设置为 0 为禁用
+    linespacing: 0 # 字号百分比，参考 <https://github.com/rime/weasel/pull/1177>
+    align_type: center # 标签、候选文字、注解文字之间的相对对齐方式：top ; center ; bottom
+    min_height: 0 # 候选框最小高度
+    max_height: 0 # 候选框最大高度，文本竖排模式下如高度超此尺寸则换列显示候选，设置为 0 不启用此功能
+    min_width: 0 # 候选框最小宽度
+    max_width: 0 # 候选框最大宽度，horizontal 布局如宽超此尺寸则换行显示候选，设置为 0 不启用此功能
+    border_width: 4 # 边框宽度
+    margin_x: 12 # 主体元素和候选框的左右边距；为负值时，不显示候选框
+    margin_y: 12 # 主体元素的上下边距；为负值时，不显示候选框
+    spacing: 8 # inline_preedit 为否时，编码区域和候选区域的间距
+    candidate_spacing: 0 # 候选项之间的间距
+    hilite_spacing: 8 # 候选项和相应标签的间距
+    hilite_padding: 8 # 高亮区域和内部文字的间距，影响高亮区域大小
+    shadow_radius: 4 # 阴影区域半径，为 0 不显示阴影；需要同时在配色方案中指定非透明的阴影颜色
+    shadow_offset_x: 4 # 阴影左右偏移距离
+    shadow_offset_y: 4 # 阴影上下偏移距离
+    corner_radius: 0 # 候选窗口圆角半径
+    round_corner: 0 # 候选背景色块圆角半径
+
+preset_color_schemes:
+  candy_paper:
+    name: Candy Paper
+    author: DF_XYZ
+    color_format: rgba
+    text_color: 0x406080
+    label_color: 0x406080
+    hilited_label_color: 0x406080
+    comment_text_color: 0x406080
+    hilited_comment_text_color: 0x406080
+    back_color: 0xF2FFE6
+    border_color: 0x008000
+    shadow_color: 0x00000080
+    hilited_candidate_back_color: 0xCEF2AA
+    hilited_candidate_border_color: 0xCEF2AA

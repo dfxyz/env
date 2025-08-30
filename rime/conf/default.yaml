@@ -1,0 +1,133 @@
+config_version: '20250830'
+
+schema_list:
+  - schema: 'nature_code'
+
+menu:
+  page_size: 7
+
+# 方案选单相关
+switcher:
+  caption: '「方案选单」'
+  hotkeys:
+    - Control+grave
+  save_options:
+    - ascii_punct
+    - traditionalization
+    - full_shape
+  fold_options: false
+
+# 选单选项设置
+switches:
+  - name: ascii_mode
+    states: [中, EN]
+    reset: 0
+  - name: ascii_punct
+    states: [¥, $]
+  - name: full_shape
+    states: [半, 全]
+  - name: traditionalization
+    states: [简, 繁]
+
+# 中英状态切换相关按键
+ascii_composer:
+  good_old_caps_lock: true # CapsLock切换大小写状态
+  switch_key:
+    Caps_Lock: clear
+    Shift_L: commit_code
+    Shift_R: noop
+    Control_L: noop
+    Control_R: noop
+
+key_binder:
+  # 以词定字
+  select_character:
+    - first: 'bracketleft'
+    - last: 'bracketright'
+
+  bindings:
+    # -/+ 翻页
+    - { when: composing, accept: minus, send: Page_Up }
+    - { when: composing, accept: equal, send: Page_Down }
+
+    # <C-h>/<C-d> 退格与删除
+    - { when: composing, accept: Control+h, send: BackSpace }
+    - { when: composing, accept: Control+d, send: Delete }
+
+    # <C-a>/<C-e> 移动到两端
+    - { when: composing, accept: Control+a, send: Home }
+    - { when: composing, accept: Control+e, send: End }
+
+    # <C-p>/<C-n> 选择候选词
+    - { when: composing, accept: Control+p, send: Up }
+    - { when: composing, accept: Control+n, send: Down }
+
+# 标点符号按键映射
+punctuator:
+  full_shape:
+    ' ': '　'
+    ',': '，'
+    '.': '。'
+    '<': '《'
+    '>': '》'
+    '/': '／'
+    '?': '？'
+    ';': '；'
+    ':': '：'
+    "'": { pair: ['‘', '’'] }
+    '"': { pair: ['“', '”'] }
+    '\': '＼'
+    '|': '｜'
+    '`': '｀'
+    '~': '～'
+    '!': '！'
+    '@': '＠'
+    '#': '＃'
+    '%': '％'
+    '$': '￥'
+    '^': '……'
+    '&': '＆'
+    '*': '＊'
+    '(': '（'
+    ')': '）'
+    '-': '－'
+    '_': '——'
+    '+': '＋'
+    '=': '＝'
+    '[': '［'
+    ']': '］'
+    '{': '｛'
+    '}': '｝'
+  half_shape:
+    ',': '，'
+    '.': '。'
+    '<': '《'
+    '>': '》'
+    '/': '/'
+    '?': '？'
+    ';': '；'
+    ':': '：'
+    "'": { pair: ['‘', '’'] }
+    '"': { pair: ['“', '”'] }
+    '\': '、'
+    '|': '|'
+    '`': '`'
+    '~': '~'
+    '!': '！'
+    '@': '@'
+    '#': '#'
+    '%': '%'
+    '$': '¥'
+    '^': '……'
+    '&': '&'
+    '*': '*'
+    '(': '（'
+    ')': '）'
+    '-': '-'
+    '_': '——'
+    '+': '+'
+    '=': '='
+    '[': '【'
+    ']': '】'
+    '{': '「'
+    '}': '」'

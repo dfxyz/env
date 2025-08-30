@@ -36,7 +36,7 @@ function __copy() {
         fi
     fi
 
-    cp "$1" "$1.tmp" || return 100
+    cp -r "$1" "$1.tmp" || return 100
     __scanOptions "$1.tmp"
     if [[ ${#__options[@]} > 0 ]]; then
         for option in "${__options[@]}"; do
