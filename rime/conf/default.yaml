@@ -42,8 +42,8 @@ ascii_composer:
 key_binder:
   # 以词定字
   select_character:
-    - first: 'bracketleft'
-    - last: 'bracketright'
+    first: 'bracketleft'
+    last: 'bracketright'
 
   bindings:
     # -/+ 翻页
