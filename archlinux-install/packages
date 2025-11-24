@@ -1,9 +1,6 @@
 # essential packages
 base base-devel linux linux-firmware networkmanager
-amd-ucode cifs-utils dosfstools e2fsprogs ntfs-3g
-
-# shell and terminal emulator
-zsh alacritty
+amd-ucode cifs-utils dosfstools e2fsprogs ntfs-3g zsh
 
 # text editor
 neovim neovide xclip xsel wl-clipboard

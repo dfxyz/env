@@ -34,5 +34,10 @@
   {
     "key": "ctrl+,",
     "command": "-workbench.action.openWindsurfSettings"
+  },
+  {
+    "key": "ctrl+shift+c",
+    "command": "-windsurf.openCodeMapView",
+    "when": "codemapsEnabled"
   }
 ]

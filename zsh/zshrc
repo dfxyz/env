@@ -78,7 +78,7 @@ zmodload zsh/complist
 bindkey -M menuselect '^[[Z' reverse-menu-complete # <Shift-Tab>
 bindkey -M menuselect '^M' .accept-line # <Enter>
 
-autoload history-search-end
+autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end  history-search-end
 bindkey '^[[5~' history-beginning-search-backward-end # <PageUp>

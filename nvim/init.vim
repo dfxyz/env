@@ -13,7 +13,7 @@ set fileencodings=ucs-bom,utf-8,gbk,gb18030,euc-jp,latin1
 set fileformat=unix fileformats=unix,dos
 set modeline
 set scrolloff=5 sidescrolloff=20
-set showtabline=2
+set showtabline=1
 set termguicolors
 " __[option(windows)]__
 "

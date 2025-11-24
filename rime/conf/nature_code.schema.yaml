@@ -11,6 +11,7 @@ key_binder:
 
 punctuator:
   __include: default:/punctuator
+  digit_separators: "" # 避免输入数字后再输入标点会上屏为半角符号
 
 # 输入引擎
 engine:
