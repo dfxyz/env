@@ -18,15 +18,6 @@
     "when": "editorHasSelection"
   },
   {
-    "key": "ctrl+f12",
-    "command": "workbench.action.gotoSymbol",
-    "when": "editorFocus"
-  },
-  {
-    "key": "alt+f12",
-    "command": "workbench.action.terminal.toggleTerminal"
-  },
-  {
     "key": "ctrl+alt+o",
     "command": "editor.action.organizeImports",
     "when": "textInputFocus && !editorReadonly"

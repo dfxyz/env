@@ -1,7 +1,13 @@
 ; vim: ts=2 sw=0
 
+; Tips:
+; `^` is `CTRL`
+; `+` is `SHIFT`
+; `!` is `ALT`
+; `#` is `WIN`
+
 ; Open terminal with "Ctrl+Alt+T"
-^!t::Run("D:\bin\alacritty.exe", EnvGet("USERPROFILE"))
+^!t::Run("wt.exe", EnvGet("USERPROFILE"))
 
 ; TotalCMD: open new tab with middle mouse button
 #HotIf WinActive("ahk_class TTOTAL_CMD") && TC_OpenTabCheck()
