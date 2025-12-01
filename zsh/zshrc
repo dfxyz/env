@@ -155,7 +155,7 @@ alias vim=nvim
 alias gvi=neovide
 alias gvim=neovide
 
-salias paci='pacman -S'
+salias pac='pacman -S'
 salias pacy='pacman -Sy'
 salias pacu='pacman -Syu'
 salias pacr='pacman -Rsn'
