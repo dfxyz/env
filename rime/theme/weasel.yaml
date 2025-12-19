@@ -56,13 +56,13 @@ preset_color_schemes:
     name: Candy Paper
     author: DF_XYZ
     color_format: rgba
-    text_color: 0x406080
-    label_color: 0x406080
-    hilited_label_color: 0x406080
-    comment_text_color: 0x406080
-    hilited_comment_text_color: 0x406080
-    back_color: 0xF2FFE6
+    text_color: 0x404040
+    label_color: 0x404040
+    hilited_label_color: 0x404040
+    comment_text_color: 0x404040
+    hilited_comment_text_color: 0x404040
+    back_color: 0xF0FFE0
     border_color: 0x008000
     shadow_color: 0x00000080
-    hilited_candidate_back_color: 0xCEF2AA
-    hilited_candidate_border_color: 0xCEF2AA
+    hilited_candidate_back_color: 0xCEF4AA
+    hilited_candidate_border_color: 0xCEF4AA
